@@ -2,10 +2,21 @@
 Experiment with podman
 
 ## Building the Container
+
+### Using SmallImage.dockerfile
+> **Note:** Using `SmallImage.dockerfile` results in an image size of approximately 10-20MB.
 ```sh
 podman build --no-cache -t helloworld-small-container -f src/SmallImage.dockerfile .
 # OR
 podman build -t helloworld-small-container -f src/SmallImage.dockerfile .
+```
+
+### Using BigImage.dockerfile
+> **Note:** Using `BigImage.dockerfile` results in an image size of approximately 1-2GB.
+```sh
+podman build --no-cache -t helloworld-big-container -f src/BigImage.dockerfile .
+# OR
+podman build -t helloworld-big-container -f src/BigImage.dockerfile .
 ```
 
 ## Configuration
