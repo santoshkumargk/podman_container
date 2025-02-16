@@ -76,6 +76,34 @@ ls -l /app/helloworld
 ./helloworld /app/config.txt
 ```
 
+## Viewing Logs
+
+### When the Log Path is Mounted
+If the log path is mounted, you can directly view the logs on the host system:
+```sh
+cat /path/to/podman_container/logs/log.txt
+```
+
+### When the Log Path is Not Mounted
+To get logs from a running or stopped container when the log path is not mounted:
+```sh
+podman ps -a
+```
+Example output:
+```
+CONTAINER ID  IMAGE                           COMMAND               CREATED         STATUS                     PORTS  NAMES
+d1f2e5783d85  localhost/helloworld-small-container:latest  ./helloworld  40 minutes ago  Exited (0) 10 minutes ago         helloworld-container
+```
+```sh
+podman cp d1f2e5783d85:/app/logs/log.txt /path/to/podman_container/logs/log.txt
+cat /path/to/podman_container/logs/log.txt
+```
+
+If you want to inspect running container logs without copying when the log path is not mounted:
+```sh
+podman exec -it helloworld-container cat /app/logs/log.txt
+```
+
 ## Managing the Container
 
 ### Stopping the Container
