@@ -1,7 +1,31 @@
 # podman_container
 Experiment with podman
 
+## Dependencies
+Ensure you have Podman installed on your system. You can install Podman using the following commands:
+
+### On Fedora
+```sh
+sudo dnf install -y podman
+```
+
+### On Ubuntu
+```sh
+sudo apt-get update
+sudo apt-get install -y podman
+```
+
+### On macOS
+```sh
+brew install podman
+```
+
 ## Building the Container
+
+Navigate to the base directory of the cloned repository:
+```sh
+cd /path/to/podman_container
+```
 
 ### Using SmallImage.dockerfile
 > **Note:** Using `SmallImage.dockerfile` results in an image size of approximately 10-20MB.
