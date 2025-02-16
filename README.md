@@ -9,6 +9,11 @@ echo "This is a configuration value" > /home/santosh/sandbox/podman/podman_conta
 
 podman run --rm --privileged --entrypoint /app/helloworld -v /home/santosh/sandbox/podman/podman_container/config/config.txt:/app/config.txt helloworld-small-container /app/config.txt
 
+podman run --rm --privileged --entrypoint /app/helloworld \
+  -v /home/santosh/sandbox/podman/podman_container/config/config.txt:/app/config.txt \
+  -v /home/santosh/sandbox/podman/podman_container/logs:/app/logs \
+  helloworld-small-container /app/config.txt
+
 
 Debugging:
 podman run --rm --privileged -v /home/santosh/sandbox/podman/podman_container/config/config.txt:/app/config.txt -it helloworld-small-container sh
