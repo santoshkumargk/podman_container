@@ -1,0 +1,3 @@
+Configuration file read successfully: /app/config.txt
+Hello, World!
+Configuration Value: This is a configuration value
