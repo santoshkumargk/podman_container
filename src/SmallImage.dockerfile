@@ -12,6 +12,9 @@ COPY src/helloworld.cpp .
 # Compile the source file
 RUN g++ -o helloworld helloworld.cpp
 
+# Ensure the binary has executable permissions
+RUN chmod +x helloworld
+
 # Stage 2: Create a smaller runtime image
 FROM alpine:latest
 
