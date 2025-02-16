@@ -10,26 +10,28 @@ podman build -t helloworld-small-container -f src/SmallImage.dockerfile .
 
 ## Configuration
 ```sh
-echo "This is a configuration value" > /home/santosh/sandbox/podman/podman_container/config/config.txt
+echo "This is a configuration value" > /path/to/podman_container/config/config.txt
 ```
 
 ## Running the Container
-```sh
-podman run --rm --privileged --entrypoint /app/helloworld \
-  -v /home/santosh/sandbox/podman/podman_container/config/config.txt:/app/config.txt \
-  helloworld-small-container /app/config.txt
-```
+
+> **Note:** The following command is obsolete:
+> ```sh
+> podman run --rm --privileged --entrypoint /app/helloworld \
+>   -v /path/to/podman_container/config/config.txt:/app/config.txt \
+>   helloworld-small-container /app/config.txt
+> ```
 
 ```sh
 podman run --rm --privileged --entrypoint /app/helloworld \
-  -v /home/santosh/sandbox/podman/podman_container/config/config.txt:/app/config.txt \
-  -v /home/santosh/sandbox/podman/podman_container/logs:/app/logs \
+  -v /path/to/podman_container/config/config.txt:/app/config.txt \
+  -v /path/to/podman_container/logs:/app/logs \
   helloworld-small-container /app/config.txt
 ```
 
 ## Debugging
 ```sh
-podman run --rm --privileged -v /home/santosh/sandbox/podman/podman_container/config/config.txt:/app/config.txt -it helloworld-small-container sh
+podman run --rm --privileged -v /path/to/podman_container/config/config.txt:/app/config.txt -it helloworld-small-container sh
 ```
 
 ### Inside the Container
@@ -37,4 +39,26 @@ podman run --rm --privileged -v /home/santosh/sandbox/podman/podman_container/co
 ls -l /app/config.txt
 ls -l /app/helloworld
 ./helloworld /app/config.txt
+```
+
+## Managing the Container
+
+### Stopping the Container
+```sh
+podman stop <container_id>
+```
+
+### Checking if the Container is Running
+```sh
+podman ps
+```
+
+### Deleting the Container
+```sh
+podman rm <container_id>
+```
+
+### Removing the Image
+```sh
+podman rmi helloworld-small-container
 ```
