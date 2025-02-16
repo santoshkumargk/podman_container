@@ -131,3 +131,23 @@ Logs can also be viewed using the `podman logs` command:
 ```sh
 podman logs <container_id>
 ```
+
+## Network Configuration
+
+### Accessing the Complete Host Network
+To access the complete host network, use the `--network host` option:
+```sh
+podman run --rm --privileged --network host --entrypoint /app/helloworld \
+  -v /path/to/podman_container/config/config.txt:/app/config.txt \
+  -v /path/to/podman_container/logs:/app/logs \
+  helloworld-small-container /app/config.txt
+```
+
+### Mapping Certain Ports
+To map certain ports, use the `-p` option:
+```sh
+podman run --rm --privileged -p <host_port>:<container_port> --entrypoint /app/helloworld \
+  -v /path/to/podman_container/config/config.txt:/app/config.txt \
+  -v /path/to/podman_container/logs:/app/logs \
+  helloworld-small-container /app/config.txt
+```
