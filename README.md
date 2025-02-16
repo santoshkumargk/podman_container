@@ -62,3 +62,9 @@ podman rm <container_id>
 ```sh
 podman rmi helloworld-small-container
 ```
+
+## Viewing Logs
+Logs can also be viewed using the `podman logs` command:
+```sh
+podman logs <container_id>
+```
