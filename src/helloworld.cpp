@@ -2,6 +2,11 @@
 #include <fstream>
 #include <string>
 
+void log_message(const std::string& message, std::ofstream& log_file) {
+    log_file << message << std::endl;
+    std::cout << message << std::endl;
+}
+
 int main(int argc, char* argv[]) {
     if (argc != 2) {
         std::cerr << "Usage: " << argv[0] << " <config_file_path>" << std::endl;
@@ -21,18 +26,14 @@ int main(int argc, char* argv[]) {
     if (config_file.is_open()) {
         std::getline(config_file, config_value);
         config_file.close();
-        log_file << "Configuration file read successfully: " << config_file_path << std::endl;
+        log_message("Configuration file read successfully: " + config_file_path, log_file);
     } else {
-        std::cerr << "Unable to open configuration file: " << config_file_path << std::endl;
-        log_file << "Unable to open configuration file: " << config_file_path << std::endl;
-        log_file.close();
+        log_message("Unable to open configuration file: " + config_file_path, log_file);
         return 1;
     }
 
-    std::cout << "Hello, World!" << std::endl;
-    std::cout << "Configuration Value: " << config_value << std::endl;
-    log_file << "Hello, World!" << std::endl;
-    log_file << "Configuration Value: " << config_value << std::endl;
+    log_message("Hello, World!", log_file);
+    log_message("Configuration Value: " + config_value, log_file);
 
     log_file.close();
     return 0;
