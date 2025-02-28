@@ -151,3 +151,51 @@ podman run --rm --privileged -p <host_port>:<container_port> --entrypoint /app/h
   -v /path/to/podman_container/logs:/app/logs \
   helloworld-small-container /app/config.txt
 ```
+
+## Running Podman Container as a Systemd Service
+
+### Create the Container with a Certain Name
+```sh
+podman create --name helloworld-container --privileged --entrypoint /app/helloworld \
+  -v /path/to/podman_container/config/config.txt:/app/config.txt \
+  -v /path/to/podman_container/logs:/app/logs \
+  helloworld-small-container /app/config.txt
+```
+
+### Generate the Service File
+```sh
+podman generate systemd --name helloworld-container > ./systemd/helloworld-container-original.service
+```
+
+### Modify the Service File
+1. Remove `PIDFile`
+2. Remove `RequiresMountsFor`
+2. Change `Type=simple`
+3. Add `User=username` (Note: Should be the user used to create the container)
+
+### Copy the Service File
+Rename systemd/helloworld-container-original.service to helloworld-container.service.
+```sh
+sudo cp ./systemd/helloworld-container.service /etc/systemd/system/
+sudo systemctl daemon-reload
+```
+
+### Start the Container as a Systemd Service
+```sh
+sudo systemctl start helloworld-container
+```
+
+### Stop the Container as a Systemd Service
+```sh
+sudo systemctl stop helloworld-container
+```
+
+### Check the Status of the Container as a Systemd Service
+```sh
+sudo systemctl status helloworld-container
+```
+
+### Monitor the Systemd Service Logs
+```sh
+journalctl -u helloworld-container.service -f
+```
